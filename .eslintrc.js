@@ -32,6 +32,7 @@ module.exports = {
         semi: ['error', 'always'],
         'space-before-blocks': 'error',
         'import/prefer-default-export': 'off',
+        '@typescript-eslint/ban-types': 'off',
     },
     overrides: [
         {
