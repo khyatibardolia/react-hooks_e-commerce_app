@@ -12,12 +12,11 @@ type initialState = {
 };
 
 const Products = () => {
-    const allProducts: Array<[]> | any = useSelector((state: initialState) => {
-        return state?.AppReducer?.products;
-    });
-    const perPageProducts: Array<[]> | any = useSelector((state: initialState) => {
-        return state?.AppReducer?.perPageProducts;
-    });
+    const { products, perPageProducts } = useSelector((state: initialState) => state.AppReducer);
+    const [currentPageProducts, setCurrentPageProducts] = useState(perPageProducts);
+    useEffect(() => {
+        setCurrentPageProducts(perPageProducts);
+    }, [perPageProducts]);
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setLoader] = useState(false);
 
@@ -36,63 +35,63 @@ const Products = () => {
 
     console.log('offset', offset);
     useEffect(() => {
-        if (allProducts && allProducts.length) {
-            setPageCount(Math.ceil(allProducts.length / PER_PAGE));
+        if (products && products.length) {
+            setPageCount(Math.ceil(products.length / PER_PAGE));
         }
-    }, [allProducts]);
+    }, [products]);
 
     const fetchProducts = useCallback(() => {
         setLoader(true);
-        dispatch(GetProducts(PER_PAGE, offset)).then((res: any) => {
+        dispatch(GetProducts(PER_PAGE, offset)).then(() => {
             // setFinalProducts(res.payload);
             setLoader(false);
         });
     }, [dispatch, offset]);
 
     useEffect(() => {
-        if (allProducts && !allProducts.length) {
-            dispatch(GetProducts()).then((res: any) => {
+        if (products && !products.length) {
+            dispatch(GetProducts()).then(() => {
                 fetchProducts();
             });
         }
-    }, [dispatch, fetchProducts, allProducts]);
+    }, [dispatch, fetchProducts, products]);
 
     return (
-        <main className="product-page">
-            {perPageProducts && perPageProducts.length ? (
-                <div className="container">
-                    {isLoading ? (
-                        <div className={'d-flex justify-content-center align-items-center'}>
-                            <span className="spinner-border loader" role="status" />
-                        </div>
-                    ) : (
-                        <ItemsList products={perPageProducts} />
-                    )}
-                    <div className={'p-4 d-flex justify-content-center'}>
-                        <ReactPaginate
-                            previousLabel={'<'}
-                            nextLabel={'>'}
-                            breakLabel={'...'}
-                            breakClassName={'break-me'}
-                            pageCount={pageCount}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={handlePageClick}
-                            containerClassName="pagination"
-                            activeClassName="active"
-                            pageLinkClassName="page-link"
-                            breakLinkClassName="page-link"
-                            nextLinkClassName="page-link"
-                            previousLinkClassName="page-link"
-                            pageClassName="page-item"
-                            nextClassName="page-item"
-                            previousClassName="page-item"
-                        />
+        <main className="product-page h-100">
+            <div className="container">
+                {isLoading ? (
+                    <div className={'d-flex justify-content-center align-items-center'}>
+                        <span className="spinner-border loader" role="status" />
                     </div>
+                ) : currentPageProducts && currentPageProducts.length ? (
+                    <ItemsList products={currentPageProducts} />
+                ) : (
+                    <div>No data</div>
+                )}
+            </div>
+            {!isLoading && currentPageProducts && currentPageProducts.length ? (
+                <div className={'p-4 d-flex justify-content-center'}>
+                    <ReactPaginate
+                        previousLabel={'<'}
+                        nextLabel={'>'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageClick}
+                        containerClassName="pagination"
+                        activeClassName="active"
+                        pageLinkClassName="page-link"
+                        breakLinkClassName="page-link"
+                        nextLinkClassName="page-link"
+                        previousLinkClassName="page-link"
+                        pageClassName="page-item"
+                        nextClassName="page-item"
+                        previousClassName="page-item"
+                    />
                 </div>
-            ) : (
-                <div className={'text-center'}>No data found...</div>
-            )}
+            ) : null}
         </main>
     );
 };

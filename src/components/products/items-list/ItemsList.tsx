@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ItemslistTypes } from './itemslist.types';
-import { addItems, addItemsToCart, addItemsToWishList } from '../../../redux/actions/helpers';
-import { useDispatch, useSelector } from 'react-redux';
+import { addItemsToCart, addItemsToWishList } from '../../../redux/actions/helpers';
+import { useDispatch } from 'react-redux';
 
 type Props = {
     products: ItemslistTypes[];
@@ -11,15 +11,15 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
     const dispatch = useDispatch();
 
     const [pData, setpData] = useState(products);
+    useEffect(() => {
+        setpData(products);
+    }, [products]);
+
     const addItemsToCartOrWishList = (product: any, type: string) => {
-        //const newArr = [];
-        console.log('product', product);
         const isCart = type === 'cart';
         if (isCart) {
-            // product.itemAddedToCart = true;
             dispatch(addItemsToCart(product));
         } else {
-            //product.isFavorite = !product.isFavorite;
             dispatch(addItemsToWishList(product));
         }
         const newArr = pData.map((item) => {

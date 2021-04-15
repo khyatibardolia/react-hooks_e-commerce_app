@@ -5,4 +5,6 @@ export interface appState {
     perPageProducts: ItemslistTypes[];
     cartItems: ItemslistTypes[];
     wishList: ItemslistTypes[];
+    totalItemsInCart: number;
+    totalItemsInWishlist: number;
 }

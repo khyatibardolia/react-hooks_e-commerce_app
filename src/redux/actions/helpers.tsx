@@ -7,6 +7,7 @@ import {
     FETCH_PRODUCTS,
     FETCH_PRODUCTS_ERROR,
     REMOVE_ITEMS_FROM_CART,
+    UPDATE_PRODUCT_QTY,
 } from '../reducers/constants';
 import { ActionCreator } from 'redux';
 import { ItemslistTypes } from '../../components/products/items-list/itemslist.types';
@@ -143,13 +144,17 @@ export const addItemsToWishList: ActionCreator<any> = (product: ItemslistTypes) 
     });
 };
 
-export const removeFromCart: ActionCreator<any> = (product: any) => (
-    dispatch: Dispatch<any>,
-    getState: any,
-) => {
-    const cartItems = getState()
-        .AppReducer.cartItems.slice()
-        .filter((x: any) => x.uuid !== product.uuid);
-    dispatch({ type: REMOVE_ITEMS_FROM_CART, payload: cartItems });
+export const removeFromCart: ActionCreator<any> = (product: any) => (dispatch: Dispatch<any>) => {
+    return dispatch({
+        type: REMOVE_ITEMS_FROM_CART,
+        payload: { product },
+    });
     //localStorage.setItem('cartItems', JSON.stringify(cartItems));
+};
+
+export const updateProductQty: ActionCreator<any> = (product: any) => (dispatch: Dispatch<any>) => {
+    return dispatch({
+        type: UPDATE_PRODUCT_QTY,
+        payload: { product },
+    });
 };
