@@ -34,6 +34,12 @@ module.exports = {
         'import/prefer-default-export': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        'prettier/prettier': [
+            'error',
+            {
+                endOfLine: 'auto',
+            },
+        ],
     },
     overrides: [
         {

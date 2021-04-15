@@ -1,18 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ItemslistTypes } from './itemslist.types';
+import { addItems, addItemsToCart, addItemsToWishList } from '../../../redux/actions/helpers';
+import { useDispatch, useSelector } from 'react-redux';
 
 type Props = {
     products: ItemslistTypes[];
 };
 const ItemsList: React.FC<Props> = ({ products }: Props) => {
     console.log('products', products);
+    const dispatch = useDispatch();
+
+    const [pData, setpData] = useState(products);
+    const addItemsToCartOrWishList = (product: any, type: string) => {
+        //const newArr = [];
+        console.log('product', product);
+        const isCart = type === 'cart';
+        if (isCart) {
+            // product.itemAddedToCart = true;
+            dispatch(addItemsToCart(product));
+        } else {
+            //product.isFavorite = !product.isFavorite;
+            dispatch(addItemsToWishList(product));
+        }
+        const newArr = pData.map((item) => {
+            if (item.uuid === product.uuid) {
+                if (isCart) {
+                    item.itemAddedToCart = true;
+                } else {
+                    item.isFavorite = !item.isFavorite;
+                }
+                return { ...item };
+            } else {
+                return item;
+            }
+        });
+        setpData(newArr);
+    };
+
     return (
-        <ul className="product-list">
-            {products && products.length
-                ? products.map((item) => {
-                      console.log('item', item.discount);
+        <div className="product-list row">
+            {pData && pData.length
+                ? pData.map((item) => {
                       return (
-                          <li key={item.uuid} className="product-list__item">
+                          <div
+                              key={item.uuid}
+                              className="col-sm-12 col-lg-4 col-md-6 product-list__item"
+                          >
                               <article
                                   className="product shadow-sm"
                                   itemScope
@@ -25,9 +58,14 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
                                           alt="Product"
                                           itemProp="image"
                                       />
-                                      <button className="product__wishlist-button button button--round button--wishlist">
+                                      <button
+                                          onClick={() => addItemsToCartOrWishList(item, 'wishlist')}
+                                          className="product__wishlist-button button button--round button--wishlist"
+                                      >
                                           <svg
-                                              className="icon"
+                                              className={`icon ${
+                                                  item.isFavorite ? 'favorite' : ''
+                                              }`}
                                               width="20px"
                                               height="20px"
                                               viewBox="0 6 20 20"
@@ -45,39 +83,49 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
                                       </button>
                                   </figure>
                                   <div className="product__details">
-                                      <h1 className="product__title" itemProp="brand">
-                                          {item.title}
-                                      </h1>
-                                      <p className="product__subtitle" itemProp="description">
-                                          {item.description}
-                                      </p>
-                                      <div
-                                          className="product__price"
-                                          itemScope
-                                          itemType="http://schema.org/Offer"
-                                      >
-                                          <span className="product__price--strike">
-                                              {item.discount > 0
-                                                  ? item.net_price.formatted_value
-                                                  : ''}
-                                          </span>
+                                      <div className={'h-75'}>
+                                          <h1 className="product__title" itemProp="brand">
+                                              {item.title}
+                                          </h1>
+                                          <p className="product__subtitle" itemProp="description">
+                                              {item.description}
+                                          </p>
+                                          <div
+                                              className="product__price"
+                                              itemScope
+                                              itemType="http://schema.org/Offer"
+                                          >
+                                              <span className="product__price--strike">
+                                                  {item.discount > 0
+                                                      ? item.net_price.formatted_value
+                                                      : ''}
+                                              </span>
+                                          </div>
+                                      </div>
+                                      <div>
                                           <span
                                               className="product__price--discounted"
                                               itemProp="price"
                                           >
                                               {item?.retail_price?.formatted_value}
                                           </span>
+                                          <button
+                                              disabled={item.itemAddedToCart}
+                                              onClick={() => addItemsToCartOrWishList(item, 'cart')}
+                                              className={`product__add-to-cart button button--primary ${
+                                                  item.itemAddedToCart ? 'disable-btn' : ''
+                                              }`}
+                                          >
+                                              {!item.itemAddedToCart ? 'Add to Cart' : 'In Cart'}
+                                          </button>
                                       </div>
-                                      <button className="product__add-to-cart button button--primary">
-                                          Add to Cart
-                                      </button>
                                   </div>
                               </article>
-                          </li>
+                          </div>
                       );
                   })
                 : null}
-        </ul>
+        </div>
     );
 };
 export default ItemsList;

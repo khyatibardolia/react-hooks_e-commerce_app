@@ -1,0 +1,95 @@
+.shop__cart__table {
+    margin-bottom: 30px;
+    table {
+        width: 100%;
+    }
+    thead {
+        border-bottom: 1px solid #f2f2f2;
+        th {
+            font-size: 18px;
+            color: #111;
+            font-weight: 600;
+            text-transform: uppercase;
+            background-color: #f5f5f5;
+        }
+    }
+    tbody {
+        tr {
+            border-bottom: 1px solid #f2f2f2;
+            td {
+                padding: 30px 10px;
+            }
+            .cart__product__item {
+                display: flex;
+                overflow: hidden;
+                width: 585px;
+                img {
+                    float: left;
+                    margin-right: 25px;
+                }
+                .cart__product__item__title {
+                    overflow: hidden;
+                    padding-top: 23px;
+                    h6 {
+                        color: #111;
+                        font-weight: 600;
+                    }
+                    .rating {
+                        i {
+                            font-size: 10px;
+                            color: #e3c01c;
+                            margin-right: -4px;
+                        }
+                    }
+                }
+            }
+            .cart__price {
+                font-size: 16px;
+                color: #aa7ad0;
+                font-weight: 600;
+                width: 190px;
+            }
+            .cart__quantity {
+                width: 190px;
+                .pro-qty {
+                    border: none;
+                    padding: 0;
+                    width: 110px;
+                    border-radius: 0;
+                    input {
+                        color: #444;
+                        width: 90px;
+                        padding: 7px;
+                    }
+                    .qtybtn {
+                        font-size: 16px;
+                        color: #444;
+                    }
+                }
+            }
+            .cart__total {
+                font-size: 18px;
+                color: #aa7ad0;
+                font-weight: 700;
+                width: 150px;
+            }
+            .cart__close {
+                text-align: right;
+                span {
+                    outline: none;
+                    height: 45px;
+                    width: 45px;
+                    background: #f2f2f2;
+                    border-radius: 50%;
+                    font-size: 18px;
+                    color: #ca1515;
+                    line-height: 44px;
+                    text-align: center;
+                    display: inline-block;
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

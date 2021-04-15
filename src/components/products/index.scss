@@ -7,8 +7,6 @@
 }
 .product-list__item {
   padding: 10px;
-  flex: 1 0 33.3333%;
-  max-width: 33.3333%;
 }
 .product {
   display: flex;
@@ -57,6 +55,8 @@
 }
 .product__price--discounted {
   color: #F54B5E;
+  font-size: 16px;
+  font-weight: 500;
 }
 .icon {
   width: 20px;
@@ -100,13 +100,25 @@
     color: #ffffff;
     background: linear-gradient(to right, #f0f9ff 0%, #aa7ad0 0%, #d07acd 100%);
   }
+
+}
+.disable-btn {
+  cursor: not-allowed;
+  &:hover {
+    border: 1px solid #d9d9d9;
+    color: #d9d9d9 !important;
+    background: none !important;
+  }
 }
 .button--wishlist {
+  border: 1px solid #aa7ad0;
   &:hover {
-    border: 1px solid #aa7ad0;
     >.icon {
       fill: #aa7ad0;
     }
+  }
+  .favorite {
+    fill: #aa7ad0;
   }
 }
 .button--in-cart {

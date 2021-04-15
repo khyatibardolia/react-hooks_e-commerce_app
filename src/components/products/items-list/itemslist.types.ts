@@ -4,6 +4,10 @@ export interface ItemslistTypes {
     title: number;
     description: number;
     discount: number;
+    quantity?: number;
+    isFavorite?: boolean;
+    itemAddedToCart?: boolean;
     net_price: { formatted_value: string };
     retail_price: { formatted_value: string };
+    subTotal?: number;
 }
