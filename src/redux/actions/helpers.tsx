@@ -3,10 +3,12 @@ import axios from 'axios';
 import {
     ADD_ITEMS_TO_CART,
     ADD_ITEMS_TO_WISHLIST,
+    ADD_WISHLIST_ITEMS_TO_CART,
     FETCH_PER_PAGE_PRODUCTS,
     FETCH_PRODUCTS,
     FETCH_PRODUCTS_ERROR,
     REMOVE_ITEMS_FROM_CART,
+    REMOVE_ITEMS_FROM_WISHLIST,
     UPDATE_PRODUCT_QTY,
 } from '../reducers/constants';
 import { ActionCreator } from 'redux';
@@ -35,12 +37,9 @@ export const GetProducts: ActionCreator<any> = (limit?: number, offset?: number)
                     offset,
                 },
             });
-            console.log('limit && offset', limit, offset);
             if (limit) {
-                console.log('limit called');
                 return dispatch({ type: FETCH_PER_PAGE_PRODUCTS, payload: response?.data });
             } else {
-                console.log('all prod called');
                 return dispatch({ type: FETCH_PRODUCTS, payload: response?.data });
             }
         } catch (error) {
@@ -115,7 +114,6 @@ export const addItems: ActionCreator<any> = (product: ItemslistTypes, type: stri
             dispatch({ type: FETCH_PER_PAGE_PRODUCTS, payload: productData });
             //localStorage.setItem('cartItems', JSON.stringify(data));
         } else {
-            console.log('productData', productData);
             dispatch({
                 type: ADD_ITEMS_TO_WISHLIST,
                 payload: data,
@@ -144,9 +142,28 @@ export const addItemsToWishList: ActionCreator<any> = (product: ItemslistTypes) 
     });
 };
 
+export const addWishlistItemsToCart: ActionCreator<any> = (product: ItemslistTypes) => (
+    dispatch: Dispatch<any>,
+) => {
+    return dispatch({
+        type: ADD_WISHLIST_ITEMS_TO_CART,
+        payload: { product },
+    });
+};
+
 export const removeFromCart: ActionCreator<any> = (product: any) => (dispatch: Dispatch<any>) => {
     return dispatch({
         type: REMOVE_ITEMS_FROM_CART,
+        payload: { product },
+    });
+    //localStorage.setItem('cartItems', JSON.stringify(cartItems));
+};
+
+export const removeFromWishList: ActionCreator<any> = (product: any) => (
+    dispatch: Dispatch<any>,
+) => {
+    return dispatch({
+        type: REMOVE_ITEMS_FROM_WISHLIST,
         payload: { product },
     });
     //localStorage.setItem('cartItems', JSON.stringify(cartItems));

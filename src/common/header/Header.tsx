@@ -14,11 +14,10 @@ const Header: React.FC = () => {
     const [cartData, setCartData] = useState(cartItems);
 
     useEffect(() => {
-        console.log('called');
         setCartData(cartItems);
     }, [cartItems]);
     return (
-        <header className="header">
+        <header className="header shadow">
             <h1 className="page-title m-0">
                 <span
                     className={'outline-none'}

@@ -42,7 +42,6 @@ body {
   -moz-osx-font-smoothing: grayscale;  /* Font smoothing tweaks for MacOSx in Gecko */
   -webkit-font-smoothing: antialiased;
   color: #444A59;
-  /*background-color: #f8f8f8;*/
 }
 
 * {
@@ -76,6 +75,7 @@ body {
   height: max-content;
   min-height: calc(100% - 100px);
   margin-top: 50px;
+  overflow-x: hidden;
 }
 .outline-none {
   outline: none;

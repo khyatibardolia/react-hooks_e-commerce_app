@@ -1,14 +1,17 @@
 import {
     ADD_ITEMS_TO_CART,
     ADD_ITEMS_TO_WISHLIST,
+    ADD_WISHLIST_ITEMS_TO_CART,
     FETCH_PER_PAGE_PRODUCTS,
     FETCH_PRODUCTS,
     FETCH_PRODUCTS_ERROR,
     REMOVE_ITEMS_FROM_CART,
+    REMOVE_ITEMS_FROM_WISHLIST,
     UPDATE_PRODUCT_QTY,
 } from './constants';
 import { AnyAction } from 'redux';
 import { appState } from './appState.types';
+import { ItemslistTypes } from '../../components/products/items-list/itemslist.types';
 
 const initialState: appState = {
     products: [],
@@ -62,7 +65,6 @@ export const AppReducer = (state = initialState, action: AnyAction): appState =>
                 }
             });
             if (action.payload.product.isFavorite) {
-                console.log('went inside', state.wishList);
                 state.wishList.forEach((d: any, i: number) => {
                     if (state.wishList[i].uuid === action.payload.product.uuid) {
                         state.wishList.splice(i, 1);
@@ -74,7 +76,6 @@ export const AppReducer = (state = initialState, action: AnyAction): appState =>
                 state.wishList.push({ ...obj, quantity: 1 });
             }
             const obj = getData(state, action.payload, 'wishlist');
-            console.log('objjj', obj);
             return {
                 ...state,
                 wishList: state.wishList,
@@ -95,14 +96,42 @@ export const AppReducer = (state = initialState, action: AnyAction): appState =>
             };
         }
         case UPDATE_PRODUCT_QTY: {
-            /*const index = state.cartItems.findIndex(
-                (d: any) => d.uuid === action.payload.product.uuid,
-            );
-            if (index > -1) {
-                state.cartItems[index].quantity = action.payload.product.quantity;
-            }*/
             return {
                 ...state,
+            };
+        }
+        case REMOVE_ITEMS_FROM_WISHLIST: {
+            const data = state.wishList
+                .slice()
+                .filter((x: any) => x.uuid !== action.payload.product.uuid);
+            const obj = getData(state, action.payload, 'item_removed');
+            return {
+                ...state,
+                wishList: data,
+                perPageProducts: obj.perPageProducts,
+                totalItemsInWishlist: data.length,
+            };
+        }
+        case ADD_WISHLIST_ITEMS_TO_CART: {
+            state.cartItems.forEach((x: any) => {
+                if (x.uuid === action.payload.product.uuid) {
+                    alreadyExists = true;
+                }
+            });
+            let updatedWishListData = [];
+
+            if (!alreadyExists) {
+                state.cartItems.push({ ...action.payload.product, quantity: 1 });
+                updatedWishListData = getDataToRemoveFromWishlist(state, action.payload.product);
+            } else {
+                updatedWishListData = getDataToRemoveFromWishlist(state, action.payload.product);
+            }
+            return {
+                ...state,
+                wishList: updatedWishListData,
+                cartItems: state.cartItems,
+                totalItemsInWishlist: updatedWishListData.length,
+                totalItemsInCart: state.cartItems.length,
             };
         }
         default:
@@ -136,4 +165,10 @@ const getData = (state: appState, payload: any, type: string) => {
     return {
         perPageProducts: state.perPageProducts,
     };
+};
+
+const getDataToRemoveFromWishlist = (state: appState, product: ItemslistTypes) => {
+    let data: ItemslistTypes[] = [];
+    data = state.wishList.slice().filter((x: any) => x.uuid !== product.uuid);
+    return data;
 };

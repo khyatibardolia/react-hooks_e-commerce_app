@@ -57,7 +57,7 @@ const Products = () => {
 
     return (
         <>
-            <div className="product-page py-2 container">
+            <div className="product-page pt-5 container">
                 {isLoading ? (
                     <div className={'vh-100 d-flex justify-content-center align-items-center'}>
                         <span className="spinner-border loader" role="status" />
@@ -72,27 +72,29 @@ const Products = () => {
             </div>
 
             {!isLoading && currentPageProducts?.length ? (
-                <div className={'py-4 d-flex justify-content-center align-items-center'}>
-                    <ReactPaginate
-                        previousLabel={'<'}
-                        nextLabel={'>'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        forcePage={currentPage}
-                        onPageChange={handlePageClick}
-                        containerClassName="pagination"
-                        activeClassName="active"
-                        pageLinkClassName="page-link"
-                        breakLinkClassName="page-link"
-                        nextLinkClassName="page-link"
-                        previousLinkClassName="page-link"
-                        pageClassName="page-item"
-                        nextClassName="page-item"
-                        previousClassName="page-item"
-                    />
+                <div className={'p-4 d-flex justify-content-center align-items-center'}>
+                    <div>
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            forcePage={currentPage}
+                            onPageChange={handlePageClick}
+                            containerClassName="pagination"
+                            activeClassName="active"
+                            pageLinkClassName="page-link"
+                            breakLinkClassName="page-link"
+                            nextLinkClassName="page-link"
+                            previousLinkClassName="page-link"
+                            pageClassName="page-item"
+                            nextClassName="page-item"
+                            previousClassName="page-item"
+                        />
+                    </div>
                 </div>
             ) : null}
         </>

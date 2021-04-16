@@ -7,7 +7,6 @@ type Props = {
     products: ItemslistTypes[];
 };
 const ItemsList: React.FC<Props> = ({ products }: Props) => {
-    console.log('products', products);
     const dispatch = useDispatch();
 
     const [pData, setpData] = useState(products);
