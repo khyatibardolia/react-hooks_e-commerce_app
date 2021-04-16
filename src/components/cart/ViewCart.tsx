@@ -123,7 +123,7 @@ const ViewCart = () => {
 
     console.log('cartDatacartDatacartDatacartDatacartData', cartData);
     return (
-        <section className="shop-cart">
+        <section className="shop-cart py-3">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">

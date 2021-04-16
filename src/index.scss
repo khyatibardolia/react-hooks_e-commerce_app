@@ -73,8 +73,9 @@ body {
   background-image: linear-gradient(to bottom, #484848, #606060, #787878, #A0A0A0, #D0D0D0);
 }
 .h-body {
- /* height: max-content;
-  max-height: calc(100% - 100px);*/
+  height: max-content;
+  min-height: calc(100% - 100px);
+  margin-top: 50px;
 }
 .outline-none {
   outline: none;

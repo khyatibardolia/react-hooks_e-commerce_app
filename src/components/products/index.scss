@@ -23,6 +23,7 @@
 .product__image {
   max-width: 100%;
   height: auto;
+  min-height: 200px;
   border-radius: 8px;
 }
 .product__details {
@@ -125,8 +126,12 @@
   pointer-events: none;
   background-color: #d9d9d9;
 }
+.pagination {
+  margin-bottom: 0;
+}
 .page-link {
-  color: #aa7ad0 !important;
+  font-weight: 600;
+  color: #9f2ff7 !important;
   box-shadow: none !important;
 }
 .page-item.active {

@@ -21,56 +21,58 @@ const Products = () => {
     const [isLoading, setLoader] = useState(false);
 
     const [pageCount, setPageCount] = useState(0);
-    const [offset, setoffset] = useState(0);
     const dispatch = useDispatch();
     const PER_PAGE = 6;
 
     const handlePageClick = ({ selected: selectedPage }: any) => {
-        setoffset(selectedPage * PER_PAGE);
         setCurrentPage(selectedPage);
-        fetchProducts();
+        const offset = selectedPage * PER_PAGE;
+        fetchProducts(offset);
     };
 
-    console.log('currentPage', currentPage);
-
-    console.log('offset', offset);
     useEffect(() => {
         if (products && products.length) {
             setPageCount(Math.ceil(products.length / PER_PAGE));
         }
     }, [products]);
 
-    const fetchProducts = useCallback(() => {
-        setLoader(true);
-        dispatch(GetProducts(PER_PAGE, offset)).then(() => {
-            // setFinalProducts(res.payload);
-            setLoader(false);
-        });
-    }, [dispatch, offset]);
+    const fetchProducts = useCallback(
+        (offset) => {
+            setLoader(true);
+            dispatch(GetProducts(PER_PAGE, offset)).then(() => {
+                setLoader(false);
+            });
+        },
+        [dispatch],
+    );
 
     useEffect(() => {
         if (products && !products.length) {
+            setLoader(true);
             dispatch(GetProducts()).then(() => {
-                fetchProducts();
+                fetchProducts(currentPage * PER_PAGE);
             });
         }
-    }, [dispatch, fetchProducts, products]);
+    }, [dispatch, fetchProducts, products, currentPage]);
 
     return (
-        <main className="product-page h-100">
-            <div className="container">
+        <>
+            <div className="product-page py-2 container">
                 {isLoading ? (
-                    <div className={'d-flex justify-content-center align-items-center'}>
+                    <div className={'vh-100 d-flex justify-content-center align-items-center'}>
                         <span className="spinner-border loader" role="status" />
                     </div>
-                ) : currentPageProducts && currentPageProducts.length ? (
+                ) : !isLoading && currentPageProducts?.length ? (
                     <ItemsList products={currentPageProducts} />
                 ) : (
-                    <div>No data</div>
+                    <div className={'d-flex justify-content-center align-items-center'}>
+                        <h4>No data found...</h4>
+                    </div>
                 )}
             </div>
-            {!isLoading && currentPageProducts && currentPageProducts.length ? (
-                <div className={'p-4 d-flex justify-content-center'}>
+
+            {!isLoading && currentPageProducts?.length ? (
+                <div className={'py-4 d-flex justify-content-center align-items-center'}>
                     <ReactPaginate
                         previousLabel={'<'}
                         nextLabel={'>'}
@@ -79,6 +81,7 @@ const Products = () => {
                         pageCount={pageCount}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
+                        forcePage={currentPage}
                         onPageChange={handlePageClick}
                         containerClassName="pagination"
                         activeClassName="active"
@@ -92,7 +95,7 @@ const Products = () => {
                     />
                 </div>
             ) : null}
-        </main>
+        </>
     );
 };
 export default Navigation(Products);
