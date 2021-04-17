@@ -57,7 +57,7 @@ const Products = () => {
 
     return (
         <>
-            <div className="product-page pt-5 container">
+            <div className="product-page mt-4 container">
                 {isLoading ? (
                     <div className={'vh-100 d-flex justify-content-center align-items-center'}>
                         <span className="spinner-border loader" role="status" />

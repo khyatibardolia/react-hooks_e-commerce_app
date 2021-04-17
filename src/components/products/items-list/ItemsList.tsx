@@ -71,7 +71,7 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
                                               version="1.1"
                                               xmlns="http://www.w3.org/2000/svg"
                                           >
-                                              <title>Wishlist Icon</title>
+                                              <title>Add to Wishlist</title>
                                               <polygon
                                                   id="Wishlist-Icon"
                                                   stroke="none"

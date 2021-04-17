@@ -1,0 +1,27 @@
+.page-not-found {
+    background-color: #f5f5f5;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    h1 {
+        font: normal normal bold 33px 'Lato-Bold', sans-serif;;
+    }
+
+    p {
+        font: normal normal normal 17px/30px 'Lato-Bold', sans-serif;;
+    }
+
+    .btn-back {
+        padding: 13px;
+        font-family: 'Lato-Bold', sans-serif;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1.39px;
+        border: 2px solid #aa7ad0;
+        color: #ffffff;
+        background: linear-gradient(to right, #f0f9ff 0%, #aa7ad0 0%, #d07acd 100%);
+        &:hover {
+            color: #fff !important;
+        }
+    }
+}

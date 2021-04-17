@@ -9,7 +9,7 @@ export const Navigation = <P extends Object>(
         return (
             <>
                 <Header />
-                <div className={'p-0 h-body'}>
+                <div className={'p-0 h-body mt-5'}>
                     <WrappedComponent {...props} />
                 </div>
                 <Footer />
