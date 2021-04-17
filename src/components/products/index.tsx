@@ -59,11 +59,14 @@ const Products = () => {
         <>
             <div className="product-page mt-4 container">
                 {isLoading ? (
-                    <div className={'vh-100 d-flex justify-content-center align-items-center'}>
+                    <div
+                        data-testid="loader"
+                        className={'vh-100 d-flex justify-content-center align-items-center'}
+                    >
                         <span className="spinner-border loader" role="status" />
                     </div>
                 ) : !isLoading && currentPageProducts?.length ? (
-                    <ItemsList products={currentPageProducts} />
+                    <ItemsList data-testid="items-list" products={currentPageProducts} />
                 ) : (
                     <div className={'d-flex justify-content-center align-items-center'}>
                         <h4>No data found...</h4>

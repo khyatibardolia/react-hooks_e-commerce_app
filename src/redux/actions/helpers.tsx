@@ -14,7 +14,7 @@ import {
 import { ActionCreator } from 'redux';
 import { ItemslistTypes } from '../../components/products/items-list/itemslist.types';
 
-const API_BASE_URL = 'https://api.musement.com/api/v3';
+export const API_BASE_URL = 'https://api.musement.com/api/v3';
 
 export const Axios = axios.create({
     baseURL: API_BASE_URL,
