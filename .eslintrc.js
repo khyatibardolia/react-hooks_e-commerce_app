@@ -13,6 +13,7 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'plugin:prettier/recommended',
         'plugin:jsx-a11y/strict',
+        'plugin:cypress/recommended',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -22,7 +23,7 @@ module.exports = {
         ecmaVersion: 2018,
         sourceType: 'module',
     },
-    plugins: ['react', 'jsx-a11y', '@typescript-eslint', 'react-hooks', 'prettier'],
+    plugins: ['react', 'jsx-a11y', '@typescript-eslint', 'react-hooks', 'prettier', 'cypress'],
     rules: {
         'react-hooks/exhaustive-deps': 'error',
         'no-var': 'error',

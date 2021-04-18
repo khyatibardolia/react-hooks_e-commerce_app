@@ -11,7 +11,7 @@ type Props = {
     tableHeadArr: TableHead[];
     data?: ItemslistTypes[];
     isCartPage?: boolean;
-    handleChange?: (event: any, item: ItemslistTypes) => void;
+    handleChange?: (event: React.ChangeEvent<HTMLInputElement>, item: ItemslistTypes) => void;
     removeCartItem?: (item: ItemslistTypes) => void;
     removeWishlistItem?: (item: ItemslistTypes) => void;
     addWishlistItemToCart?: (item: ItemslistTypes) => void;
@@ -28,7 +28,7 @@ const Table: React.FC<Props> = ({
 }: Props) => {
     return (
         <div className="shop__cart__table table-responsive">
-            <table className={'table'}>
+            <table className={'table'} data-testid={'table'}>
                 {data && data.length ? (
                     <thead>
                         <tr>

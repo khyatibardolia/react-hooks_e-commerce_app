@@ -66,7 +66,7 @@ const Products = () => {
                         <span className="spinner-border loader" role="status" />
                     </div>
                 ) : !isLoading && currentPageProducts?.length ? (
-                    <ItemsList data-testid="items-list" products={currentPageProducts} />
+                    <ItemsList products={currentPageProducts} />
                 ) : (
                     <div className={'d-flex justify-content-center align-items-center'}>
                         <h4>No data found...</h4>

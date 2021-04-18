@@ -18,3 +18,14 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root') || document.createElement('div'),
 );
+declare global {
+    interface Window {
+        Cypress: any;
+    }
+    interface Window {
+        store: any;
+    }
+}
+if (window.Cypress) {
+    window.store = store;
+}

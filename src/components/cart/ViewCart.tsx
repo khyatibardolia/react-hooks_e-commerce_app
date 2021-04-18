@@ -44,7 +44,7 @@ const ViewCart = () => {
     const dispatch = useDispatch();
 
     const handleChange = useCallback(
-        (event: any, product: any) => {
+        (event: React.ChangeEvent<HTMLInputElement>, product: Cart) => {
             const newArr = cartData.map((item) => {
                 if (item.uuid === product.uuid) {
                     item.quantity = event.target.value;
@@ -54,7 +54,6 @@ const ViewCart = () => {
                     return item;
                 }
             });
-            //   dispatch(updateProductQty(product));
             setCartData(newArr);
         },
         [dispatch, cartData],

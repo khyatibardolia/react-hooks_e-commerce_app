@@ -12,9 +12,10 @@
         "module": "esnext",
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        "isolatedModules": true,
         "noEmit": true,
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+        "types": ["cypress"],
+        "isolatedModules": true
     },
-    "include": ["src"]
+    "include": ["src", "../node_modules/cypress", "cypress/*/*.ts"]
 }

@@ -37,7 +37,7 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
     };
 
     return (
-        <div className="product-list row">
+        <div className="product-list row" data-testid={'items'}>
             {pData && pData.length
                 ? pData.map((item) => {
                       return (
@@ -52,6 +52,7 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
                               >
                                   <figure className="product__image-wrapper m-0">
                                       <img
+                                          data-testid={'item-image'}
                                           className="product__image"
                                           src={item.cover_image_url}
                                           alt="Product"
@@ -83,10 +84,18 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
                                   </figure>
                                   <div className="product__details">
                                       <div className={'h-75'}>
-                                          <h1 className="product__title" itemProp="brand">
+                                          <h1
+                                              data-testid={'item-title'}
+                                              className="product__title"
+                                              itemProp="brand"
+                                          >
                                               {item.title}
                                           </h1>
-                                          <p className="product__subtitle" itemProp="description">
+                                          <p
+                                              data-testid={'item-description'}
+                                              className="product__subtitle"
+                                              itemProp="description"
+                                          >
                                               {item.description}
                                           </p>
                                           <div
@@ -94,7 +103,10 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
                                               itemScope
                                               itemType="http://schema.org/Offer"
                                           >
-                                              <span className="product__price--strike">
+                                              <span
+                                                  data-testid={'item-net-price'}
+                                                  className="product__price--strike"
+                                              >
                                                   {item.discount > 0
                                                       ? item.net_price.formatted_value
                                                       : ''}
@@ -103,12 +115,14 @@ const ItemsList: React.FC<Props> = ({ products }: Props) => {
                                       </div>
                                       <div>
                                           <span
+                                              data-testid={'item-retail-price'}
                                               className="product__price--discounted"
                                               itemProp="price"
                                           >
                                               {item?.retail_price?.formatted_value}
                                           </span>
                                           <button
+                                              data-testid={'item-cart-btn'}
                                               disabled={item.itemAddedToCart}
                                               onClick={() => addItemsToCartOrWishList(item, 'cart')}
                                               className={`product__add-to-cart button button--primary ${
