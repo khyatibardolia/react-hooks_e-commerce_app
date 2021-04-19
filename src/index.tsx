@@ -21,8 +21,6 @@ ReactDOM.render(
 declare global {
     interface Window {
         Cypress: any;
-    }
-    interface Window {
         store: any;
     }
 }

@@ -22,7 +22,8 @@ describe('LOAD OK', () => {
         cy.request('GET', 'https://api.musement.com/api/v3/venues/164/activities').then(
             (response) => {
                 expect(response.status).equal(200);
-                expect(response.body.data).equal(response?.data);
+                expect(response.statusText).equal('OK');
+                expect(response.body.length).to.be.greaterThan(0);
                 expect(response.body).to.not.be.null;
             },
         );
@@ -35,3 +36,4 @@ describe('LOAD OK', () => {
             .should('have.length', 6);
     });
 });
+export {};

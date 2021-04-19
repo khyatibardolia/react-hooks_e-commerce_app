@@ -14,15 +14,15 @@ type initialState = {
 const Products = () => {
     const { products, perPageProducts } = useSelector((state: initialState) => state.AppReducer);
     const [currentPageProducts, setCurrentPageProducts] = useState(perPageProducts);
-    useEffect(() => {
-        setCurrentPageProducts(perPageProducts);
-    }, [perPageProducts]);
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setLoader] = useState(false);
-
     const [pageCount, setPageCount] = useState(0);
     const dispatch = useDispatch();
     const PER_PAGE = 6;
+
+    useEffect(() => {
+        setCurrentPageProducts(perPageProducts);
+    }, [perPageProducts]);
 
     const handlePageClick = ({ selected: selectedPage }: any) => {
         setCurrentPage(selectedPage);

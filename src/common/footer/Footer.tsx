@@ -6,8 +6,7 @@ const Footer: React.FC = () => {
         <footer className="footer-section">
             <div className="container">
                 <p className="copyright">
-                    Copyright ©<script>document.write(new Date().getFullYear());</script>
-                    2021 All rights reserved | The Plaza
+                    Copyright © {new Date().getFullYear()} All rights reserved | The Plaza
                 </p>
             </div>
         </footer>

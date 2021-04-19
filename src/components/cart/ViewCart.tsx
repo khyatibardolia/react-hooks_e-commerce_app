@@ -5,22 +5,13 @@ import Table from '../../common/table/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, updateProductQty } from '../../redux/actions/helpers';
 import CalculateTotal from '../../common/calculate-total/CalculateTotal';
+import { ProductType } from '../types/product-list.types';
 
-interface Cart {
-    uuid: number;
-    cover_image_url: string;
-    title: number;
-    description: number;
-    discount: number;
-    quantity?: any;
-    net_price: any;
-    retail_price: any;
-}
 const ViewCart = () => {
     const cartItems = useSelector((state: any) => {
         return state?.AppReducer?.cartItems;
     });
-    const [cartData, setCartData] = useState<Cart[]>(cartItems);
+    const [cartData, setCartData] = useState<ProductType[]>(cartItems);
 
     const tableHeadArr = [
         {
@@ -44,7 +35,7 @@ const ViewCart = () => {
     const dispatch = useDispatch();
 
     const handleChange = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>, product: Cart) => {
+        (event: React.ChangeEvent<HTMLInputElement>, product: ProductType) => {
             const newArr = cartData.map((item) => {
                 if (item.uuid === product.uuid) {
                     item.quantity = event.target.value;
@@ -60,7 +51,7 @@ const ViewCart = () => {
     );
 
     const removeCartItem = useCallback(
-        (product: Cart) => {
+        (product: ProductType) => {
             dispatch(removeFromCart(product));
         },
         [dispatch],

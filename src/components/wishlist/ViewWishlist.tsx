@@ -5,23 +5,13 @@ import { addWishlistItemsToCart, removeFromWishList } from '../../redux/actions/
 import Table from '../../common/table/Table';
 import '../../common/scss/style.scss';
 import CalculateTotal from '../../common/calculate-total/CalculateTotal';
-
-interface WishList {
-    uuid: number;
-    cover_image_url: string;
-    title: number;
-    description: number;
-    discount: number;
-    quantity?: any;
-    net_price: any;
-    retail_price: any;
-}
+import { ProductType } from '../types/product-list.types';
 
 const ViewWishlist: React.FC = () => {
     const wishListData = useSelector((state: any) => {
         return state?.AppReducer?.wishList;
     });
-    const [wishList, setWishListData] = useState<WishList[]>(wishListData);
+    const [wishList, setWishListData] = useState<ProductType[]>(wishListData);
     const tableHeadArr = [
         {
             title: 'Product',
@@ -41,14 +31,14 @@ const ViewWishlist: React.FC = () => {
     const dispatch = useDispatch();
 
     const removeWishlistItem = useCallback(
-        (product: WishList) => {
+        (product: ProductType) => {
             dispatch(removeFromWishList(product));
         },
         [dispatch],
     );
 
     const addWishlistItemToCart = useCallback(
-        (product: WishList) => {
+        (product: ProductType) => {
             dispatch(addWishlistItemsToCart(product));
         },
         [dispatch],

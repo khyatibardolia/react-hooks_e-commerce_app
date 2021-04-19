@@ -27,7 +27,7 @@ const Table: React.FC<Props> = ({
     addWishlistItemToCart,
 }: Props) => {
     return (
-        <div className="shop__cart__table table-responsive">
+        <div className="shop__cart__table table-responsive h-100">
             <table className={'table'} data-testid={'table'}>
                 {data && data.length ? (
                     <thead>
@@ -119,7 +119,7 @@ const Table: React.FC<Props> = ({
                         })
                     ) : (
                         <tr>
-                            <td colSpan={tableHeadArr.length} className={'text-center'}>
+                            <td colSpan={tableHeadArr.length} className={'text-center vw-100'}>
                                 <h5 className={'m-0'}>
                                     {isCartPage
                                         ? 'Your cart is currently empty...'

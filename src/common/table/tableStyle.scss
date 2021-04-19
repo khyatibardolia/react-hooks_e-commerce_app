@@ -2,6 +2,10 @@
     margin-bottom: 30px;
     table {
         width: 100%;
+        display: block;
+        height: max-content;
+        max-height: 550px;
+        overflow: auto;
     }
     thead {
         border-bottom: 1px solid #f2f2f2;
@@ -22,14 +26,16 @@
             .cart__product__item {
                 display: flex;
                 overflow: hidden;
-                width: 585px;
+                width: 500px;
                 img {
                     float: left;
                     margin-right: 25px;
                 }
                 .cart__product__item__title {
                     overflow: hidden;
-                    padding-top: 23px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     h6 {
                         color: #111;
                         font-weight: 600;
@@ -47,10 +53,10 @@
                 font-size: 16px;
                 color: #aa7ad0;
                 font-weight: 600;
-                width: 190px;
+                width: 200px;
             }
             .cart__quantity {
-                width: 190px;
+                width: 200px;
                 .pro-qty {
                     border: none;
                     padding: 0;
@@ -71,10 +77,10 @@
                 font-size: 18px;
                 color: #aa7ad0;
                 font-weight: 700;
-                width: 120px;
+                width: 140px;
             }
             .cart__close {
-                text-align: right;
+                text-align: center;
                 span {
                     outline: none;
                     height: 45px;
