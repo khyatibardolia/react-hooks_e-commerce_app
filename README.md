@@ -1,6 +1,12 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simple e-commerce application having functionalities such as:
+
+- Get Product List from a Rest API.
+- Product list having pagination with 6 products per page.
+- User can Add/Remove product from Cart.
+- User can Add/Remove product from Wishlist.
+- User can Add product to cart from Wishlist.
 
 ## Available Scripts
 
@@ -14,10 +20,22 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npm run test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run format`
+
+Prettier is an opinionated code formatter. If you want to format your code, this command will take care of it.
+
+### `npm run lint`
+
+ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code, with the goal of making code more consistent and avoiding bugs.To achieve this, use this command.
+
+### `npm run cypress:open`
+
+Launches the test runner for e2e testing with browser.
 
 ### `npm run build`
 
@@ -27,20 +45,25 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# React / Docker build setup to run app in production mode.
 
-### `npm run eject`
+Deploy a create-react-app into production with docker multi-stage build.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Build the Docker image:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+docker build . -t js_challenge_jagaad_khyati-bardolia
+```
+To see the list images built in your system, run the following command:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+docker images
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Run your application-container with:
 
-## Learn More
+```
+docker run -p 8000:80 js_challenge_jagaad_khyati-bardolia
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Now open http://localhost:8000 in your browser to check its running !
