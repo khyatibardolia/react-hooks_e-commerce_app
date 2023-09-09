@@ -23,6 +23,7 @@ export const Axios = axios.create({
         'Content-Type': 'application/json',
         'Cache-Control': 'no-cache',
         'x-musement-version': '3.4.0',
+        'x-musement-application': 'musement_com-si3tehmi91',
     },
 });
 
