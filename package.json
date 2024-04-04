@@ -31,7 +31,7 @@
         "lint": "eslint src --ext .js,.ts,.tsx",
         "eslint": "eslint .",
         "eslint:fix": "eslint . --fix --max-warnings=0",
-        "build": "react-scripts build",
+        "build": "react-scripts --openssl-legacy-provider build",
         "test": "react-scripts test --watch",
         "cypress:open": "cypress open",
         "cypress:run": "cypress run",
