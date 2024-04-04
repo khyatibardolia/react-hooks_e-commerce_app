@@ -1,12 +1,12 @@
 # Getting Started with Create React App
 
-This project is a simple e-commerce application having functionalities such as:
+This project is a simple excursions application having functionalities such as:
 
-- Get Product List from a Rest API.
-- Product list having pagination with 6 products per page.
-- User can Add/Remove product from Cart.
-- User can Add/Remove product from Wishlist.
-- User can Add product to cart from Wishlist.
+- Get excursion List from a Rest API.
+- Excursion list having pagination with 6 products per page.
+- User can Add/Remove excursion from Cart.
+- User can Add/Remove excursion from Wishlist.
+- User can Add excursion to cart from Wishlist.
 
 ## Available Scripts
 
